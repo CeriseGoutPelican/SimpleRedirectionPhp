@@ -1,5 +1,12 @@
 <section class="bg-white">
-    <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+
+    <p class="text-base text-center text-red-400">
+        <a href="<?= $url ?>logout.php" class="rounded-full p-2 hover:underline focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-red-200">
+            Logout
+        </a>
+    </p>
+
+    <div class="max-w-screen-xl px-4 pb-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
         <div class="flex justify-center mt-8 space-x-6">
             <a href="https://www.instagram.com/gregoiregaonach/" class="text-gray-400 hover:text-gray-500 focus:outline-none p-2 rounded-full focus:ring-offset-2 focus:ring-2 focus:ring-gray-200">
                 <span class="sr-only">Instagram</span>
@@ -21,7 +28,7 @@
             </a>
         </div>
         <p class="mt-5 text-base leading-6 text-center text-gray-400">
-            <a target="_blank" href="https://paypal.me/gregoiregaonach">
+            <a target="_blank" href="https://paypal.me/gregoiregaonach" class="rounded-full focus:ring-offset-2 focus:ring-2 focus:ring-gray-200">
                 Buy me a coffee
             </a>
 
