@@ -1,7 +1,7 @@
 <section class="w-full px-8 py-16 bg-white xl:px-8">
     <div class="max-w-5xl mx-auto">
 
-    	<form action="./actions<?= isset($_GET['k'])?'?v=edit&k='.$_GET['k']:'?v=add'; ?>" method="post">
+    	<form action="./actions.php<?= isset($_GET['k'])?'?v=edit&k='.$_GET['k']:'?v=add'; ?>" method="post">
     		
     		<div class="flex mb-6">
 			    <label for="key" class="text-sm border border-2 rounded-l-lg px-4 py-2 bg-blue-100 text-blue-600 whitespace-nowrap">Key (without spaces or special characters) :</label>
