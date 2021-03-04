@@ -1,10 +1,12 @@
 <section class="bg-white">
 
-    <p class="text-base text-center text-red-400">
-        <a href="<?= $url ?>logout.php" class="rounded-full p-2 hover:underline focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-red-200">
-            Logout
-        </a>
-    </p>
+    <?php if (isset($_SESSION['userData']['login'])): ?>
+        <p class="text-base text-center text-red-400">
+            <a href="<?= $url ?>logout.php" class="rounded-full p-2 hover:underline focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-red-200">
+                Logout
+            </a>
+        </p>
+    <?php endif ?>
 
     <div class="max-w-screen-xl px-4 pb-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
         <div class="flex justify-center mt-8 space-x-6">
