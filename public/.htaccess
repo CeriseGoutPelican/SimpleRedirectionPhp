@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !index.php
+RewriteCond %{REQUEST_URI} !tailwind.css
+RewriteCond %{REQUEST_URI} !styles.css
+RewriteCond %{REQUEST_URI} !actions.php
+RewriteCond %{REQUEST_URI} !logout.php
+RewriteRule (.*) index.php?go=$1
