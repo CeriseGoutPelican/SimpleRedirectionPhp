@@ -38,8 +38,8 @@
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
                             <?= date('m/d/Y', $v['time']) ?>
                         </td>
-                        <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
-                            <a target="_blank" href="<?= $url.$k ?>" class="border-b-2 border-gray-300 border-dotted"><?= $k ?></a>
+                        <td class="p-3 hover:bg-gray-50 h-14 md:h-auto ">
+                            <a target="_blank" href="<?= $url.$k ?>" class="p-2 border-b-2 border-gray-300 hover:border-gray-500 border-dotted focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-gray-200"><?= $k ?></a>
                         </td>
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
                             <?= $v['count'] ?>
