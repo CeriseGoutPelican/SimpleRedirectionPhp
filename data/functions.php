@@ -11,11 +11,16 @@ function redirection(array $redirections, string $go){
 
         if(isset($redirections[$go])){
 
-            editJson('redirections.json', $redirections, $go, [
-                'count' => ($redirections[$go]['count'] + 1),
-                'statistics' => [date("d M") => $redirections[$go]['statistics'][date("d M")] + 1],
-                'logs' => [time() => getUserIpAddr()]
-            ]);
+            // Avoid Facebook, Twitter, etc. bots to be in the stats
+            if(stripos($_SERVER['HTTP_USER_AGENT'],'bot') === false){
+
+                editJson('redirections.json', $redirections, $go, [
+                    'count' => ($redirections[$go]['count'] + 1),
+                    'statistics' => [date("d M") => $redirections[$go]['statistics'][date("d M")] + 1],
+                    'logs' => $redirections[$go]['logs'] + [time() => getUserIpAddr()]
+                ]);
+
+            }
 
             header('Location: '. $redirections[$go]['url']);
             exit();
