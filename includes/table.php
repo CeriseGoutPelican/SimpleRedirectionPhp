@@ -44,10 +44,10 @@
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
                             <?= $v['count'] ?>
                         </td>
-                        <td class="p-3 truncate hover:bg-gray-50 h-14 md:h-auto">
+                        <td class="p-3 truncate overflow-clip overflow-hidden  hover:bg-gray-50 h-14 md:h-auto">
                             <?= $v['url'] ?>
                         </td>
-                        <td class="p-3 hover:bg-gray-50 h-16 md:h-auto h-16 md:h-auto">
+                        <td class="hover:bg-gray-50 h-16 md:h-auto h-16 md:h-auto" style="max-width: 220px;">
                             <div class="flex item-center justify-center">
                             
                                 <a href="<?= $url ?>actions.php?v=statistics&k=<?= $k ?>" class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110 bg-blue-100 p-2 w-10 h-10 rounded-full focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-blue-200">
