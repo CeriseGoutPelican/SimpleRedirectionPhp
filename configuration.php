@@ -1,6 +1,6 @@
 <?php
 	
-	$https = true;
+	$https = false;
 	
 	$url   = ($https?'https':'http').'://'.$_SERVER['HTTP_HOST'].'/';
 

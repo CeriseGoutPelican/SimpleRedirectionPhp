@@ -36,12 +36,12 @@ if (isset($_SESSION['userData']['login'])){
 
 				if($_POST['key'] == $_GET['k']){
 					
-					editJson($json, $_GET['k'], ['url' => $_POST['url'], 'count' => $_POST['count']]);
+					editJson("redirections.json", $json, $_GET['k'], ['url' => $_POST['url'], 'count' => $_POST['count']]);
 				
 				} else {
 
 					$newJson = editKeyJson($json, $_GET['k'], $_POST['key']);
-					editJson($newJson, $_POST['key'], ['url' => $_POST['url'], 'count' => $_POST['count']]);
+					editJson("redirections.json", $newJson, $_POST['key'], ['url' => $_POST['url'], 'count' => $_POST['count']]);
 
 				}
 
@@ -63,7 +63,7 @@ if (isset($_SESSION['userData']['login'])){
 
 			if(isset($_POST['key']) && $_POST['key'] != "" && isset($_POST['url']) && $_POST['url'] != "" && isset($_POST['count']) && $_POST['count'] != "") {
 					
-				editJson($json, $_POST['key'], ['url' => $_POST['url'], 'count' => $_POST['count'], 'time' => time()]);
+				editJson("redirections.json", $json, $_POST['key'], ['url' => $_POST['url'], 'count' => $_POST['count'], 'time' => time()]);
 				
 				createNotice("The redirection was created !", "green");
 				header('Location: '.$url);
@@ -74,6 +74,16 @@ if (isset($_SESSION['userData']['login'])){
 			include('../includes/header.php');
 
 				include('../includes/editForm.php');
+
+			include('../includes/footer.php');
+		
+			break;
+
+		case 'statistics':
+
+			include('../includes/header.php');
+
+				include('../includes/showStatistics.php');
 
 			include('../includes/footer.php');
 		

@@ -39,7 +39,7 @@
                             <?= date('m/d/Y', $v['time']) ?>
                         </td>
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
-                            <?= $k ?>
+                            <a target="_blank" href="<?= $url.$k ?>" class="border-b-2 border-gray-300 border-dotted"><?= $k ?></a>
                         </td>
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
                             <?= $v['count'] ?>
@@ -50,10 +50,10 @@
                         <td class="p-3 hover:bg-gray-50 h-16 md:h-auto h-16 md:h-auto">
                             <div class="flex item-center justify-center">
                             
-                                <a target="_blank" href="<?= $url.$k ?>" class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110 bg-blue-100 p-2 w-10 h-10 rounded-full focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-blue-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <a href="<?= $url ?>actions.php?v=statistics&k=<?= $k ?>" class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110 bg-blue-100 p-2 w-10 h-10 rounded-full focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-blue-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line>
+                                        <line x1="6" y1="20" x2="6" y2="14"></line>
                                     </svg>
                                 </a>
                                 

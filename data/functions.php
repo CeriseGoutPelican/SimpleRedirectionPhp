@@ -11,7 +11,11 @@ function redirection(array $redirections, string $go){
 
         if(isset($redirections[$go])){
 
-            editJson($redirections, $go, ['count' => ($redirections[$go]['count'] + 1)]);
+            editJson('redirections.json', $redirections, $go, [
+                'count' => ($redirections[$go]['count'] + 1),
+                'statistics' => [date("d M") => $redirections[$go]['statistics'][date("d M")] + 1],
+                'logs' => [time() => getUserIpAddr()]
+            ]);
 
             header('Location: '. $redirections[$go]['url']);
             exit();
@@ -56,17 +60,18 @@ function login(string $login, string $password){
 /**
  * Update json
  *
- * array $redirections The json array with all the redirections
- * string $key The json key
- * array $edits The informations to edit (key => new value)
+ * string   $fileName The name of the file to edit in the data folder
+ * array    $redirections The json array with all the redirections
+ * string   $key The json key
+ * array    $edits The informations to edit (key => new value)
  */
-function editJson(array $redirections, string $key, array $edits){
+function editJson(string $fileName, array $redirections, string $key, array $edits){
     
     foreach ($edits as $k => $v) {
         $redirections[$key][$k] = $v;    
     }
 
-    $fp = fopen('../data/redirections.json', 'w');
+    $fp = fopen('../data/'.$fileName, 'w');
     fwrite($fp, json_encode($redirections));
     fclose($fp);
 
@@ -74,6 +79,13 @@ function editJson(array $redirections, string $key, array $edits){
 
 }
 
+/**
+ * Edit the specific key of a json file
+ * 
+ * array    $redirections 
+ * string   $key 
+ * string   $new_key 
+ */
 function editKeyJson(array $redirections, string $key, string $new_key){
 
     if(!isset($redirections[$new_key])){
@@ -110,8 +122,94 @@ function deleteJson(array $redirections, string $key){
 /**
  * Create notice
  * 
- * 
+ * string   $message The message to pass
+ * string   $color The color to use (tailwind default colors)
  */
 function createNotice(string $message, string $color){
     $_SESSION['notice'] = ["message" => $message, "color" => $color];
+}
+
+/**
+ * Convenience wrapper for htmlspecialchars().
+ * 
+ * string   $text The text to sanitize
+ */
+function h(string $text){
+    return htmlspecialchars($text);
+}
+
+/**
+ * Display the X last days as a list of Date objects
+ * 
+ * int      $number_of_days Number of days to retrieve
+ * string   $format Date time format to use (default "d M")
+ */
+function lastXDays(int $number_of_days, string $format = "d M"){
+    
+    $list_of_past_X_days = array();
+    
+    for($i = 0; $i < $number_of_days; $i++){
+        $list_of_past_X_days[] = date($format, strtotime('-'. $i .' days'));
+    }
+
+    return array_reverse($list_of_past_X_days);
+
+}
+
+/**
+ * Transform a list of objects as a simple string for JS use
+ * i.e. Date 12 Nov, Date 13 Nov -> "12 Nov", "13 Nov", 
+ * 
+ * array    $array Array to parse
+ */
+function arrayToJsList($array){
+
+    $jsList = "";
+
+    foreach ($array as $k => $v) {
+        $jsList .= '"'.$v.'", ';
+    }
+
+    return $jsList;
+
+}
+
+/**
+ * Get the last statistics from redirections.json
+ * and create an array for a range of dates
+ * 
+ * array    $dates A Date type array
+ * array    $statistics List of statistics (ex: '13 Nov' => 2)
+ */
+function statistics_data_day(array $dates, array $statistics){
+
+    $statistics_with_date = [];
+
+    foreach ($dates as $k => $v) {
+        $statistics_with_date[$v] = 0;
+
+        if(isset($statistics[$v])){
+            $statistics_with_date[$v] = $statistics[$v];
+        }
+    }
+
+    return $statistics_with_date;
+}
+
+/**
+ * Get the user IP adress
+ * 
+ * From : https://www.codexworld.com/how-to/get-user-ip-address-php/
+ */
+function getUserIpAddr(){
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+        //ip from share internet
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        //ip pass from proxy
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
 }
