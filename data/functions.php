@@ -16,7 +16,7 @@ function redirection(array $redirections, string $go){
 
                 editJson('redirections.json', $redirections, $go, [
                     'count' => ($redirections[$go]['count'] + 1),
-                    'statistics' => [date("d M") => $redirections[$go]['statistics'][date("d M")] + 1],
+                    'statistics' => $redirections[$go]['statistics'] + [date("d M") => $redirections[$go]['statistics'][date("d M")] + 1],
                     'logs' => $redirections[$go]['logs'] + [time() => getUserIpAddr()]
                 ]);
 

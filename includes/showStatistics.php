@@ -64,16 +64,26 @@
             <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-xl overflow-hidden sm:shadow-lg my-5">
                 <thead class="text-white text-sm md:text-base uppercase">
                      
-                    <tr class="bg-blue-500 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
-                        <th class="p-3 text-left h-14 md:h-auto">Date & time</th>
-                        <th class="p-3 text-left h-14 md:h-auto">IP Adress</th>
-                        <th class="p-3 text-left h-16 md:h-auto">Actions</th>
-                    </tr>
+                    <?php for ($i=0; $i < count($json[$_GET['k']]['logs']); $i++): ?>
+
+	                    <tr class="bg-blue-500 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
+	                        <th class="p-3 text-left h-14 md:h-auto">#</th>
+	                        <th class="p-3 text-left h-14 md:h-auto">Date & time</th>
+	                        <th class="p-3 text-left h-14 md:h-auto">IP Adress</th>
+	                        <th class="p-3 text-left h-16 md:h-auto">Actions</th>
+	                    </tr>
+
+	                <?php endfor; ?>
 
                 </thead>
                 <tbody class="flex-1 sm:flex-none">
-                    <?php foreach ($json[$_GET['k']]['logs'] as $time => $ip): ?>
+                    <?php $i=1; foreach ($json[$_GET['k']]['logs'] as $time => $ip): ?>
                     <tr class="md:hover:bg-gray-50 border-b border-gray-200 flex flex-col flex-no wrap sm:table-row mb-4 sm:mb-0">
+
+                        <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
+                            <?= $i ?>
+                        </td>
+
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
                             <?= date('d M, H:i', $time) ?>
                         </td>
@@ -81,6 +91,7 @@
                         <td class="p-3 hover:bg-gray-50 h-14 md:h-auto">
                             <?= h($ip) ?>
                         </td>
+
                         <td class="p-3 hover:bg-gray-50 h-16 md:h-auto h-16 md:h-auto">
                             <div class="flex item-center justify-center">
                             
@@ -93,7 +104,7 @@
                             </div>
                         </td>
                     </tr>
-                    <?php endforeach; ?>  
+                    <?php $i++; endforeach; ?>  
                 </tbody>
             </table> 
 		</div>
